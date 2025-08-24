@@ -96,3 +96,16 @@ The Wazuh SIEM lab is **fully operational**. The server is actively monitoring t
 
 **Result:**
 * After re-running the `gobuster` scan, thousands of web attack alerts were successfully ingested and displayed in the Wazuh "Discover" dashboard. The alerts correctly identified the source IP of the attacker (`10.0.2.5`) and the nature of the attack (multiple `403`/`404` errors), confirming the lab's full operational capability for threat detection.
+
+### Blue Team Alert Triage: Web Reconnaissance Detected
+**Date:** August 24, 2025
+
+**Analysis of a Sample Alert:**
+* **What happened?** Rule `31101` ("Web server 400 error code.") fired `2,422` times, indicating a massive number of client-side errors from a single source.
+* **Where?** The attack was detected on `ubuclient` (`10.0.2.6`) by monitoring the Apache log at `/var/log/apache2/access.log`.
+* **Who?** The source IP was identified as `10.0.2.5`, the Kali Linux VM.
+* **How?** The `full_log` provided the raw evidence: `... "GET /zorum HTTP/1.1" 404 ... "gobuster/3.8"`, confirming the use of the GoBuster tool.
+* **Severity:** The `rule.level: 5` (Moderate) was triggered due to the high frequency of errors, correctly identifying the activity as a potential attack rather than a simple user mistake.
+
+**Conclusion:**
+The evidence conclusively shows an automated web reconnaissance scan was launched from the Kali VM and successfully detected and logged by the Wazuh SIEM. The full "Attack, Detect, Investigate" cycle was completed.
