@@ -82,3 +82,17 @@ The Wazuh SIEM lab is **fully operational**. The server is actively monitoring t
 
 **Summary:**
 * This initial room provided a hands-on introduction to a core offensive security technique. By running the command `gobuster dir -u http://fakebank.thm -w wordlist.txt`, I successfully performed a directory busting attack against a target web application to identify unlinked pages, marking my first practical step in web reconnaissance.
+### Lab Exercise 1: Simulating and Detecting a Web Reconnaissance Attack
+**Date:** August 24, 2025
+
+**Objective:**
+* To apply the web reconnaissance techniques learned from TryHackMe in a practical lab environment and use the Wazuh SIEM to detect the simulated attack. This exercise bridges the gap between offensive (Red Team) and defensive (Blue Team) operations.
+
+**Procedure:**
+1.  **Setup Target:** Deployed an Apache web server on the Ubuntu VM (`10.0.2.6`) to act as the target. A "hidden" directory (`/secret-panel`) was created to serve as the objective for the reconnaissance scan.
+2.  **Launch Attack:** From the Kali Linux VM (`10.0.2.5`), the `gobuster` tool was used to perform a directory busting attack against the Apache server to discover the hidden directory.
+3.  **Troubleshooting:** Initial analysis showed no alerts in the Wazuh dashboard. The investigation determined that the Wazuh agent on the Ubuntu VM was not configured to monitor Apache logs by default.
+4.  **Remediation:** The agent's configuration file (`/var/ossec/etc/ossec.conf`) was modified to include a `<localfile>` block specifically for the Apache `access.log`. The agent service was then restarted.
+
+**Result:**
+* After re-running the `gobuster` scan, thousands of web attack alerts were successfully ingested and displayed in the Wazuh "Discover" dashboard. The alerts correctly identified the source IP of the attacker (`10.0.2.5`) and the nature of the attack (multiple `403`/`404` errors), confirming the lab's full operational capability for threat detection.
