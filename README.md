@@ -62,3 +62,23 @@ To monitor endpoints, Wazuh agents were deployed to the other machines in the la
 
 ### 4. Current Status & Next Steps:
 The Wazuh SIEM lab is **fully operational**. The server is actively monitoring three distinct endpoints: a Windows 11 host, an Ubuntu Desktop VM, and a Kali Linux VM. The next step is to begin using the lab for practical security exercises, including threat simulation and detection analysis.
+
+---
+## Project 2: Offensive Security Fundamentals (TryHackMe)
+
+### Module 1: Offensive Security Intro
+**Date:** August 24, 2025
+
+**Objective:**
+* To complete the introductory module of the Jr. Penetration Tester path, focusing on the practical application of a directory busting tool to discover hidden web pages.
+
+**Key Concepts Learned:**
+* **Directory Busting:** Understood the concept of using a wordlist to discover hidden directories and files on a web server that are not linked from the main site. This is a fundamental step in web reconnaissance.
+* **GoBuster Syntax:** Learned the basic command structure for `gobuster`, including the `-u` flag to specify the target URL and the `-w` flag to provide a wordlist.
+
+**Tools Used:**
+* **TryHackMe AttackBox** (Web-based Kali Linux)
+* **GoBuster** (Command-line tool)
+
+**Summary:**
+* This initial room provided a hands-on introduction to a core offensive security technique. By running the command `gobuster dir -u http://fakebank.thm -w wordlist.txt`, I successfully performed a directory busting attack against a target web application to identify unlinked pages, marking my first practical step in web reconnaissance.
